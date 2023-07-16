@@ -1,7 +1,5 @@
-import hello from "./lib/hello.js";
+import Canvas from "./lib/canvas.js";
 
-document.querySelector("#app").innerHTML = `
-  <div>
-    <h1>${hello()}</h1>
-  </div>
-`;
+document.querySelector("#app").innerHTML = `<canvas></canvas>`;
+const canvasElement = document.querySelector("canvas");
+new Canvas(canvasElement);
