@@ -1,1 +1,3 @@
-console.log("Hello World!");
+import Sync from "./sync.js";
+
+new Sync();
