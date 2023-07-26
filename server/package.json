@@ -3,10 +3,14 @@
 	"version": "0.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"dev": "node src/main.js"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.31.0"
+	}
 }
