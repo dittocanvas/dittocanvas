@@ -1,24 +1,29 @@
 class Sync {
-	constructor(delegate) {
+	attach(delegate) {
 		this.delegate = delegate;
 	}
 
-	connect() {
+	start() {
 		this.ws = new WebSocket(this.url());
-		this.ws.addEventListener("open", this.onOpen.bind(this));
+		this.ws.addEventListener("open", this.onReady.bind(this));
 		this.ws.addEventListener("message", this.onMessage.bind(this));
 	}
 
-	send(message) {
-		this.ws.send(message);
+	send(command, data) {
+		this.ws.send(JSON.stringify({ command, data }));
 	}
 
-	onOpen() {
-		this.delegate.onOpen(this);
+	onReady() {
+		this.delegate.onReady(this.send.bind(this));
+	}
+
+	onCommand(command, data) {
+		this.delegate.onCommand(command, data);
 	}
 
 	onMessage(event) {
-		this.delegate.onMessage(event.data);
+		const json = JSON.parse(event.data);
+		this.onCommand(json.command, json.data);
 	}
 
 	url() {
