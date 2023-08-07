@@ -1,3 +1,4 @@
 import Sync from "./sync.js";
+import SyncDelegate from "./sync-delegate.js";
 
-new Sync();
+new Sync(new SyncDelegate());

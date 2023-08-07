@@ -1,19 +1,10 @@
-import Canvas from "./lib/canvas.js";
-import Sync from "./lib/sync.js";
+import Sync from "./sync/sync";
+import Store from "./store/store";
+import Canvas from "./canvas/canvas";
 
-const syncDelegate = {
-	onOpen(sync) {
-		console.log("ws: open");
-		sync.send("hello from client!");
-	},
-	onMessage(message) {
-		console.log("ws: message recieved:", message);
-	},
-};
-
-const sync = new Sync(syncDelegate);
-sync.connect();
+const sync = new Sync();
+const store = new Store(sync);
 
 document.querySelector("#app").innerHTML = `<canvas></canvas>`;
 const canvasElement = document.querySelector("canvas");
-new Canvas(canvasElement);
+const canvas = new Canvas(store, canvasElement);
